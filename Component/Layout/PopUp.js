@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Modal from 'react-modal'; 
+import style from '../../Static/Style';
 
 class PopUp extends Component{
     constructor(props){
@@ -23,15 +24,25 @@ class PopUp extends Component{
     render(){
         return(
             <div>
-                <button onClick = {this.opneModal} 
-                className = "header-buttom">Open</button>
+                {style}
+                <a onClick = {this.opneModal} 
+                className = "menu-button">Open</a>
                 <Modal 
                           isOpen={this.state.modalIsOpen}
                           onAfterOpen={this.afterOpenModal}
                           onRequestClose={this.closeModal}
                           contentLabel="Example Modal">
-                              <h1>作成中...........</h1>
-                              <button onClick={this.closeModal}>CLOSE</button>
+                              <section className="modalArea">
+                              <div id="modalBg" class="modalBg"></div>
+                              <div className="modalWrapper">
+                                  <div className="modalContents">
+                              <p>作成中...........</p>
+                              </div>
+                              <div id="closeModal" class="closeModal">
+                              <button onClick={this.closeModal}>×</button>
+                              </div>
+                              </div>
+                              </section>
                           </Modal>
             </div>
         )

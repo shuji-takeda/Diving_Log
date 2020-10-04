@@ -5,11 +5,13 @@ import React, {Component} from 'react';
 class Footer extends Component {
 
     render(){
-        return (<footer>
+        return (<div>
             {style}
+            <div className="footer">
+            <p className="copy">{this.props.footer}</p>
             <div>{this.props.account}</div>
-    <p>{this.props.footer}</p>
-        </footer>
+            </div>
+        </div>
         )}
 }
 

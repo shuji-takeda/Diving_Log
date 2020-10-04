@@ -2,7 +2,7 @@ import Layout from '../Component/Layout/Layout'
 
 export default () => {
     return (<div>
-        <Layout header="Diving_point INFO"/>
+        <Layout header="Sharing  Divers  log"/>
         </div>
     )
 }
