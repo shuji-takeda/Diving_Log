@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import firebase, { database } from 'firebase';
 import firebaseInit from '../../store';
-import FirebaseCommon from '../../Static/FirebaseCommon';
-import { render } from 'react-dom';
 
 let db = firebaseInit.firestore();
 
