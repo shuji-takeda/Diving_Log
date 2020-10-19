@@ -1,79 +1,91 @@
 import React, {Component} from 'react';
-import firebase from 'firebase';
+import firebase, { database } from 'firebase';
+import firebaseInit from '../../store';
+import FirebaseCommon from '../../Static/FirebaseCommon';
+import { render } from 'react-dom';
+
+let db = firebaseInit.firestore();
 
 class Search_Form extends Component{
     constructor(props){
         super(props);
         this.exeSearch = this.exeSearch.bind(this);
-        this.changePrefectures = this.changePrefectures.bind(this);
-        this.changePlace_Name = this.changePlace_Name.bind(this);
-        this.changeShop_Name = this.changeShop_Name.bind(this);
         this.state = {
-            Prefectures:'',
-            Place_Name:'',
-            Shop_Name:'',
-            result:[]
+            Prefectures:[],
+            Url:'',
+            dataset:{}
         }
     }
-    changePrefectures(e){
-        this.setState({Prefectures:e.target.value});
+
+    setinitUrl = (url) =>{
+        this.setState({Url:url});
     }
 
-    changePlace_Name(e){
-        this.setState({Place_Name:e.target.value});
+
+    intiDataset = (dataset) =>{
+        this.setState({dataset:dataset});
     }
 
-    changeShop_Name(e){
-        this.setState({Shop_Name:e.target.value});
+    initPrefctureset = (Prefectures) =>{
+        this.setState({Prefectures:Prefectures});
+    }
+
+    componentDidMount(){
+        (async() =>{
+            const dataset = this.state.dataset
+            var latestId = ''
+            var count = 0
+            await db.collection('log').get().then(snapshots =>{
+                snapshots.forEach(doc =>{
+                    const id = doc.id
+                    latestId = id
+                    const data = doc.data()
+                    dataset[id] = data
+                    count++
+                })
+            })
+            if(count !== 0){
+            this.intiDataset(dataset);
+            this.setinitUrl(dataset[latestId].url);
+            var Prefectures = Object.keys(this.state.dataset)
+            this.initPrefctureset(Prefectures);
+            }
+        })()
+    }
+
+    getPulldown(){
+        var result = [];
+        if(this.state.Prefectures == null || this.state.Prefectures == ''){
+            return [<p>データがありません</p>]
+        }
+        for (var i in this.state.Prefectures){
+            result.push(
+                <option value={this.state.Prefectures[i]}>{this.state.Prefectures[i]}</option>
+            )
+        }
+        return result;
     }
 
     exeSearch(){
-        let conditions ={
-            Prefectures:this.state.Prefectures,
-            Place_Name:this.state.Place_Name,
-            Shop_Name:this.state.Shop_Name
-        }
 
-
-        let db = firebase.database();
-        let ref = db.ref('diving-point-map');
-        let self = this;
-        ref.orderByKey()
-        .equalTo(conditions.Prefectures)
-        .on('value', (snapshot)=>{
-            self.setState({
-                result:snapshot.val()
-            });
-        });        
     }
 
     render(){
+       
         return(
             <div>
+
                 <p>
                     検索条件を指定してください。
                 </p>
                 <table>
                     <tbody>
                         <tr>
-                            <th>Prefectures(都道府県) : </th>
+                            <th></th>
                             <td>
-                                <input type="text" size="30" value={this.state.Prefectures}
-                                onChange={this.changePrefectures} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Place＿Name(ポイント名) : </th>
-                            <td>
-                                <input type="text" size="30" value={this.state.Place_Name}
-                                onChange={this.changePlace_Name} />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Shop_Name(ご利用ショップ名) : </th>
-                            <td>
-                                <input type="text" size="30" value={this.state.Shop_Name}
-                                onChange={this.changeShop_Name} />
+                             <select name = "Prefecture">
+                               {this.getPulldown()}
+                             </select>   
                             </td>
                         </tr>
                         <tr>
@@ -86,22 +98,15 @@ class Search_Form extends Component{
                         </tr>
                     </tbody>
                 </table>
-
-                {this.state.result[0] == null
-                ?
-                <div className = "no-result">
-                <p>NO DATA.</p>
-                <p>条件に該当するログが投稿されておりません。</p>
+                    <hr />
+                <div className = "FileImage">
+                 <div className = "p-grid_list-images">
+                    <img src ={this.state.Url || "http://via.placeholder.com/300"} alt ="firebase-image" className="img"/>
+                 </div>
                 </div>
-                :
-                    <div>
-                        <p>データあり</p>
-                    </div>
-                }
-            </div>
+                </div>
         )
-    }
+    };
 }
-
 
 export default Search_Form;

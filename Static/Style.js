@@ -165,5 +165,10 @@ font-size: 16px;
     width:100%;
     height:auto;
   }
+  .map{
+    width: 100%;
+    height: 400px;
+    background-color: grey;
+  }
 
 `}</style>;

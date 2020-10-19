@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import firebase from "firebase";
 import firebaseInit from '../../store';
+//import friebaseCommon from '../../Static/firebaseCommon';
 
  let isFileFlg = false;
+ const db = firebaseInit.firestore();
+ var lastId;
 
 class Add_Form extends Component{
     constructor(props){
         super(props);
         this.state = {
-            id:'',
+            lastId:'',
             Prefectures:'',
             Place_Name:'',
             DAY:'',
@@ -20,7 +23,8 @@ class Add_Form extends Component{
             image:null,
             url:'',
             progress:0,
-            cautionMsg:[]
+            cautionMsg:[],
+            dataset:{}
         }
 
         this.onChangePrefectures = this.onChangePrefectures.bind(this);
@@ -34,6 +38,10 @@ class Add_Form extends Component{
         this.exeAdd = this.exeAdd.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleUpload = this.handleUpload.bind(this);
+    }
+
+    closeModal(){
+        openModalFlg=false;
     }
 
     handleChange(e){
@@ -105,8 +113,55 @@ class Add_Form extends Component{
         this.setState({Memo:e.target.value});
     }
 
+    intiDataset = (dataset) =>{
+        this.setState({dataset:dataset});
+    }
+
+//     getLastId(){
+//     let db = firebaseInit.database();
+//     let ref = db.ref('diving-point-map/');
+//     let self = this;
+//     ref.orderByKey()
+//     .limitToFirst(10)
+//     // .equalTo("20201003")
+//     .on('value', (snapshot)=>{
+//         let res = snapshot.val();
+//         for(let i in res){
+//             self.setState({
+//                 lastId:i
+//             });
+//             return;
+//         }
+//     });  
+// }
+
+    setLastId = (lastId) =>{
+        this.setState({lastId:lastId});
+    }
+
+componentDidMount(){
+    (async() =>{
+        const dataset = this.state.dataset
+        var count = 0
+        await db.collection('log').get().then(snapshots =>{
+            snapshots.forEach(doc =>{
+                const id = doc.id
+                const data = doc.data()
+                dataset[id] = data
+                count++
+            })
+        })
+        this.intiDataset(dataset);
+        lastId = count;
+        this.setLastId(lastId);
+    })()
+}
+
     //データ登録
     exeAdd(e){
+        const id = this.state.lastId +1
+        const nextId = '\''+id + '\''
+        // this.getLastId();
         const answer = window.confirm("登録内容にお間違いはありませんか？？")
         if(answer){
         let data = {
@@ -134,10 +189,34 @@ class Add_Form extends Component{
         }
 
         if(this.state.cautionMsg.length == 0){
-        let db = firebaseInit.database();
-        let ref = db.ref('diving-point-map');
-        console.log(ref);
-        ref.set(data);
+            db.collection('log').doc(nextId).set({
+                Prefectures:this.state.Prefectures,
+                Place_Name:this.state.Place_Name,
+                DAY:this.state.DAY,
+                Shop_Name:this.state.Shop_Name,
+                Weather:this.state.Weather,
+                SuitType:this.state.SuitType,
+                Marine_life:this.state.Marine_life,
+                Memo:this.state.Memo,
+                url:this.state.url
+            })
+        // let id = this.state.lastId * 1 + 1;
+        // let db = firebaseInit.database();
+        // // let ref = db.ref('diving-point-map/' + lastid);
+        // let ref = db.ref('diving-point-map/' + id);
+        // console.log(ref);
+        // ref.set({
+        //     ID:id,
+        //     Prefectures:data.Prefectures,
+        //     Place_Name:data.Place_Name,
+        //     DAY:data.DAY,
+        //     Weather:data.Weather,
+        //     Shop_Name:data.Shop_Name,
+        //     SuitType:data.SuitType,
+        //     Marine_life:data.Marine_life,
+        //     Memo:data.Memo,
+        //     URL:data.url
+        // });
         this.setState({
             Prefectures:'',
             Place_Name:'',
@@ -146,8 +225,11 @@ class Add_Form extends Component{
             Weather:'',
             SuitType:'',
             Marine_life:'',
-            Memo:''
+            Memo:'',
+            url:'',
+            progress:0
          })
+         window.location.href("/");
         } else {
             window.alert(this.cautionMsg);
         }
