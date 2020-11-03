@@ -8,11 +8,12 @@ class Header extends Component {
     return (
       <div>
         {style}
+        
         <div className="header">
           <header class="site-header">
             <div class="wrapper site-header__wrapper">
               <Link href="/">
-                <a className="logo">{this.props.header}</a>
+                <a className="brand">{this.props.header}</a>
               </Link>
               <nav class="nav">
                 <button class="nav__toggle" aria-expanded="false" type="button">

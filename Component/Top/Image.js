@@ -4,13 +4,11 @@ import firebaseInit from "../../store";
 import Lib from '../../lib/Common';
 import {connect} from 'react-redux';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 let db = firebaseInit.firestore();
 
 class Image extends Component {
-  ImgStyle = {
-    width: "50%",
-    padding: "20px 350px",
-  };
 
   constructor(props) {
     super(props);
@@ -79,7 +77,7 @@ class Image extends Component {
     return (
       <div className="ImgSlide">
         <section>
-          <img style={this.ImgStyle} src={this.state.Img}></img>
+          <img class="img-fluid"src={this.state.Img}></img>
           {/* <Image
             src={this.state.Img}
             alt="Picture of a triangle"

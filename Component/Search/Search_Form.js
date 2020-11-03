@@ -1,15 +1,12 @@
 import React, {Component} from "react";
 import firebase, {database} from "firebase";
 import firebaseInit from "../../store";
+//React bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 let db = firebaseInit.firestore();
 
 class Search_Form extends Component {
-
-  ImgStyle = {
-    width: "50%",
-    padding: "20px 350px",
-  };
 
   constructor(props) {
     super(props);
@@ -114,7 +111,7 @@ class Search_Form extends Component {
           <div className="p-grid_list-images">
             <img style={this.ImgStyle}
               src={this.state.Url}
-              className="img"
+              class="img-fluid"
             />
           </div>
         </div>

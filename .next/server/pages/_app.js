@@ -172,8 +172,12 @@ function getOrCreateStore(initialState) {
 // EXTERNAL MODULE: external "react-redux"
 var external_react_redux_ = __webpack_require__("h74D");
 
+// EXTERNAL MODULE: ./node_modules/bootstrap/dist/css/bootstrap.min.css
+var bootstrap_min = __webpack_require__("q4sD");
+
 // CONCATENATED MODULE: ./pages/_app.js
 var _app_jsx = external_react_default.a.createElement;
+
 
 
 
@@ -475,6 +479,13 @@ module.exports = require("next/dist/next-server/lib/utils.js");
 /***/ (function(module, exports) {
 
 module.exports = require("firebase");
+
+/***/ }),
+
+/***/ "q4sD":
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 
