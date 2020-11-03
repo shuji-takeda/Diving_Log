@@ -19,6 +19,7 @@ class Image extends Component {
       "../../Static/image/IMG_4146.JPG",
       "../../Static/image/IMG_1498.JPG",
       "../../Static/image/IMG_4731.JPG",
+      "/image/IMG_1498.JPG",
     ];
     this.state = {
       Img: this.fnameList[0],
@@ -33,7 +34,7 @@ class Image extends Component {
         index: state.index + 1,
         Img: this.fnameList[this.state.index],
       }));
-    }, 10000);
+    }, 2000);
   }
 
   render() {
