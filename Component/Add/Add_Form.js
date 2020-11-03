@@ -1,9 +1,11 @@
 import React, {Component} from "react";
 import firebase from "firebase";
 import firebaseInit from "../../store";
+import Link from "next/link";
 //import friebaseCommon from '../../Static/firebaseCommon';
 
 let isFileFlg = false;
+let completeUploadFlg = false;
 const db = firebaseInit.firestore();
 var lastId;
 
@@ -231,8 +233,11 @@ class Add_Form extends Component {
           Memo: "",
           url: "",
           progress: 0,
+          image:null
         });
-        window.location.href("/");
+        isFileFlg = false;
+        completeUploadFlg = true
+
       } else {
         window.alert(this.cautionMsg);
       }
@@ -242,114 +247,265 @@ class Add_Form extends Component {
   render() {
     return (
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <th>※Prefectures:</th>
-              <td>
-                <input
-                  type="text"
-                  size="50"
-                  maxLength="7"
-                  value={this.state.Prefectures}
-                  onChange={this.onChangePrefectures}
-                  placeholder="都道府県"
+        {completeUploadFlg ? (
+          <div class="logo">
+          <p>ご協力ありがとうございます！</p>
+          <Link href="/">
+            <a className="logo">Upload Success</a>
+          </Link>
+        </div>
+        ) : (
+          <div>
+            <div class="cp_iptxt">
+              <label>Prefectures（都道府県）</label>
+              <input
+                class="ef"
+                type="text"
+                maxLength="7"
+                placeholder=""
+                value={this.state.Prefectures}
+                onChange={this.onChangePrefectures}
+              />
+              <span class="focus_line">
+                <i></i>
+              </span>
+            </div>
+            <div class="cp_iptxt">
+              <label>Place_Name（ポイント名）</label>
+              <input
+                class="ef"
+                type="text"
+                maxLength="15"
+                placeholder=""
+                value={this.state.Place_Name}
+                onChange={this.onChangePlace_Name}
+              />
+              <span class="focus_line">
+                <i></i>
+              </span>
+            </div>
+            <div class="cp_iptxt">
+              <label>DAY</label>
+              <input
+                class="ef"
+                type="text"
+                maxLength="15"
+                placeholder="yyyymmdd"
+                value={this.state.DAY}
+                onChange={this.onChangeDAY}
+              />
+              <span class="focus_line">
+                <i></i>
+              </span>
+            </div>
+            <div class="cp_iptxt">
+              <label>Weather</label>
+              <input
+                class="ef"
+                type="text"
+                maxLength="10"
+                placeholder=""
+                value={this.state.Weather}
+                onChange={this.onChangeWeather}
+              />
+              <span class="focus_line">
+                <i></i>
+              </span>
+            </div>
+            <div class="cp_iptxt">
+              <label>Shop_Name</label>
+              <input
+                class="ef"
+                type="text"
+                maxLength="20"
+                placeholder=""
+                value={this.state.Shop_Name}
+                onChange={this.onChangeShop_Name}
+              />
+              <span class="focus_line">
+                <i></i>
+              </span>
+            </div>
+            <div class="cp_iptxt">
+              <label>SuitType</label>
+              <input
+                class="ef"
+                type="text"
+                maxLength="20"
+                placeholder=""
+                value={this.state.SuitType}
+                onChange={this.onChangeSuitType}
+              />
+              <span class="focus_line">
+                <i></i>
+              </span>
+            </div>
+            <div class="cp_iptxt">
+              <label>Marine life</label>
+              <input
+                class="ef"
+                type="text"
+                maxLength="20"
+                placeholder=""
+                value={this.state.Marine_life}
+                onChange={this.onChangeMarine_life}
+              />
+              <span class="focus_line">
+                <i></i>
+              </span>
+            </div>
+            <div class="cp_iptxt">
+              <label>Memo</label>
+              <input
+                class="ef"
+                type="text"
+                maxLength="100"
+                placeholder=""
+                value={this.state.Memo}
+                onChange={this.onChangeMemo}
+              />
+              <span class="focus_line">
+                <i></i>
+              </span>
+            </div>
+
+            <br />
+            <p>あなたのベストショットを共有しませんか????</p>
+            <div className="FileImage">
+              <progress value={this.state.progress} max="100" />
+              <br />
+              <br />
+              <input type="file" onChange={this.handleChange} />
+              {isFileFlg ? (
+                <button onClick={this.handleUpload}>Upload</button>
+              ) : null}
+              <br />
+              {this.state.url}
+              <br />
+              <div className="p-grid_list-images">
+                <img
+                  src={this.state.url || "http://via.placeholder.com/300"}
+                  alt="firebase-image"
+                  className="img"
                 />
-              </td>
-            </tr>
-            <tr>
-              <th>※Place_Name:</th>
-              <td>
-                <input
-                  type="text"
-                  size="50"
-                  maxLength="15"
-                  value={this.state.Place_Name}
-                  onChange={this.onChangePlace_Name}
-                  placeholder="ポイント名（地名）"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>※DAY:</th>
-              <td>
-                <input
-                  type="text"
-                  size="50"
-                  maxLength="10"
-                  value={this.state.DAY}
-                  onChange={this.onChangeDAY}
-                  placeholder="YYYY/MM/DD"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Weather:</th>
-              <td>
-                <input
-                  type="text"
-                  size="50"
-                  maxLength="10"
-                  value={this.state.Weather}
-                  onChange={this.onChangeWeather}
-                  placeholder="快晴"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>※Shop_Name:</th>
-              <td>
-                <input
-                  type="text"
-                  size="50"
-                  maxLength="20"
-                  value={this.state.Shop_Name}
-                  onChange={this.onChangeShop_Name}
-                  placeholder="○○ダイビングショップ"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>SuitType:</th>
-              <td>
-                <input
-                  type="text"
-                  size="50"
-                  maxLength="10"
-                  value={this.state.SuitType}
-                  onChange={this.onChangeSuitType}
-                  placeholder="ドライスーツ/ウェットスーツ"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Marine life:</th>
-              <td>
-                <input
-                  type="text"
-                  size="50"
-                  maxLength="20"
-                  value={this.state.Marine_life}
-                  onChange={this.onChangeMarine_life}
-                  placeholder="その日一番の生き物はなんでしょうか????"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Memo:</th>
-              <td>
-                <input
-                  type="textarea"
-                  size="50"
-                  maxLength="20"
-                  value={this.state.Memo}
-                  onChange={this.onChangeMemo}
-                  placeholder="透明度・透視度等、ご自由にお使いください"
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </div>
+            <button onClick={this.exeAdd}>Add</button>
+          </div>
+        )}
+        {/* <div class="cp_iptxt">
+          <label>Prefectures（都道府県）</label>
+          <input
+            class="ef"
+            type="text"
+            maxLength="7"
+            placeholder=""
+            value={this.state.Prefectures}
+            onChange={this.onChangePrefectures}
+          />
+          <span class="focus_line">
+            <i></i>
+          </span>
+        </div>
+        <div class="cp_iptxt">
+          <label>Place_Name（ポイント名）</label>
+          <input
+            class="ef"
+            type="text"
+            maxLength="15"
+            placeholder=""
+            value={this.state.Place_Name}
+            onChange={this.onChangePlace_Name}
+          />
+          <span class="focus_line">
+            <i></i>
+          </span>
+        </div>
+        <div class="cp_iptxt">
+          <label>DAY</label>
+          <input
+            class="ef"
+            type="text"
+            maxLength="15"
+            placeholder="yyyymmdd"
+            value={this.state.DAY}
+            onChange={this.onChangeDAY}
+          />
+          <span class="focus_line">
+            <i></i>
+          </span>
+        </div>
+        <div class="cp_iptxt">
+          <label>Weather</label>
+          <input
+            class="ef"
+            type="text"
+            maxLength="10"
+            placeholder=""
+            value={this.state.Weather}
+            onChange={this.onChangeWeather}
+          />
+          <span class="focus_line">
+            <i></i>
+          </span>
+        </div>
+        <div class="cp_iptxt">
+          <label>Shop_Name</label>
+          <input
+            class="ef"
+            type="text"
+            maxLength="20"
+            placeholder=""
+            value={this.state.Shop_Name}
+            onChange={this.onChangeShop_Name}
+          />
+          <span class="focus_line">
+            <i></i>
+          </span>
+        </div>
+        <div class="cp_iptxt">
+          <label>SuitType</label>
+          <input
+            class="ef"
+            type="text"
+            maxLength="20"
+            placeholder=""
+            value={this.state.SuitType}
+            onChange={this.onChangeSuitType}
+          />
+          <span class="focus_line">
+            <i></i>
+          </span>
+        </div>
+        <div class="cp_iptxt">
+          <label>Marine life</label>
+          <input
+            class="ef"
+            type="text"
+            maxLength="20"
+            placeholder=""
+            value={this.state.Marine_life}
+            onChange={this.onChangeMarine_life}
+          />
+          <span class="focus_line">
+            <i></i>
+          </span>
+        </div>
+        <div class="cp_iptxt">
+          <label>Memo</label>
+          <input
+            class="ef"
+            type="text"
+            maxLength="100"
+            placeholder=""
+            value={this.state.Memo}
+            onChange={this.onChangeMemo}
+          />
+          <span class="focus_line">
+            <i></i>
+          </span>
+        </div>
+
         <br />
         <p>あなたのベストショットを共有しませんか????</p>
         <div className="FileImage">
@@ -371,7 +527,7 @@ class Add_Form extends Component {
             />
           </div>
         </div>
-        <button onClick={this.exeAdd}>Add</button>
+        <button onClick={this.exeAdd}>Add</button> */}
       </div>
     );
   }

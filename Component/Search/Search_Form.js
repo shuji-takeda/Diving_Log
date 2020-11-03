@@ -5,6 +5,12 @@ import firebaseInit from "../../store";
 let db = firebaseInit.firestore();
 
 class Search_Form extends Component {
+
+  ImgStyle = {
+    width: "50%",
+    padding: "20px 350px",
+  };
+
   constructor(props) {
     super(props);
     this.exeSearch = this.exeSearch.bind(this);
@@ -106,9 +112,8 @@ class Search_Form extends Component {
         <hr />
         <div className="FileImage">
           <div className="p-grid_list-images">
-            <img
-              src={this.state.Url || "http://via.placeholder.com/300"}
-              alt="firebase-image"
+            <img style={this.ImgStyle}
+              src={this.state.Url}
               className="img"
             />
           </div>

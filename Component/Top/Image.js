@@ -1,4 +1,10 @@
 import React, {Component} from "react";
+import firebase, {database} from "firebase";
+import firebaseInit from "../../store";
+import Lib from '../../lib/Common';
+import {connect} from 'react-redux';
+
+let db = firebaseInit.firestore();
 
 class Image extends Component {
   ImgStyle = {
@@ -24,6 +30,7 @@ class Image extends Component {
     this.state = {
       Img: this.fnameList[0],
       index: 0,
+      dataset: {},
     };
 
     let timer = setInterval(() => {
@@ -36,6 +43,37 @@ class Image extends Component {
       }));
     }, 2000);
   }
+
+  //全件データ取得
+    //初期表示
+    componentDidMount() {
+      (async () => {
+        const dataset = this.state.dataset;
+        var latestId = "";
+        var pulldown = [];
+        var count = 0;
+        await db
+          .collection("log")
+          .get()
+          .then((snapshots) => {
+            snapshots.forEach((doc) => {
+              const id = doc.id;
+              latestId = id;
+              const data = doc.data();
+              dataset[id] = data;
+              pulldown.push(data.Prefectures);
+              count++;
+            });
+          });
+          let d = Lib.deepcopy(dataset);
+          this.props.dispatch({
+            type:'UPDATE_USER',
+            value:{
+              AD:d,
+            }
+          });
+      })();
+    }
 
   render() {
     return (
@@ -54,4 +92,5 @@ class Image extends Component {
   }
 }
 
+Image = connect((state)=>state)(Image);
 export default Image;

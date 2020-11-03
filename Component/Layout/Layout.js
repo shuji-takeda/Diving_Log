@@ -13,7 +13,7 @@ class Layout extends Component {
       <Header header={this.props.header} />
       {this.props.children}
       <hr />
-      <Footer footer="copyright タケシュ" account="twitter : @takeshshuhu"/>
+      <Footer footer="COPYRIGHT @takeshshuhu 2020" account="twitter : @takeshshuhu"/>
     </div>);
   }
 }
