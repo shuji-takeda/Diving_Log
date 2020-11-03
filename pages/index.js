@@ -1,6 +1,6 @@
 import Layout from "../Component/Layout/Layout";
 import Head from "next/head";
-import Image from "../Component/Top/Image";
+import ImageDisplay from "../Component/Top/ImageDisplay";
 import Counter from "../Component/Counter";
 
 export default () => {
@@ -12,7 +12,7 @@ export default () => {
       </Head>
       <Layout header="Sharing  Divers  log">
         <Counter />
-        <Image />
+        <ImageDisplay />
       </Layout>
     </div>
   );
