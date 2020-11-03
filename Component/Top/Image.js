@@ -33,7 +33,7 @@ class Image extends Component {
         index: state.index + 1,
         Img: this.fnameList[this.state.index],
       }));
-    }, 2000);
+    },  10000);
   }
 
   render() {
