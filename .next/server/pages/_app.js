@@ -88,15 +88,127 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 3:
+/***/ "1TCz":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/next/app.js
+var app = __webpack_require__("8Bbg");
+var app_default = /*#__PURE__*/__webpack_require__.n(app);
+
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__("cDcd");
+var external_react_default = /*#__PURE__*/__webpack_require__.n(external_react_);
+
+// EXTERNAL MODULE: ./store.js
+var store = __webpack_require__("BXF7");
+
+// CONCATENATED MODULE: ./lib/redux-store.js
+
+var __jsx = external_react_default.a.createElement;
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+const isServer = true;
+const _NRS_ = '__NEXT_REDUX_STORE__';
+
+function getOrCreateStore(initialState) {
+  if (isServer) {
+    return Object(store["b" /* initStore */])(initialState);
+  }
+
+  if (!window[_NRS_]) {
+    window[_NRS_] = Object(store["b" /* initStore */])(initialState);
+  }
+
+  return window[_NRS_];
+}
+
+/* harmony default export */ var redux_store = (App => {
+  return class AppWithRedux extends external_react_["Component"] {
+    static async getInitialProps(appContext) {
+      const reduxStore = getOrCreateStore();
+      appContext.ctx.reduxStore = reduxStore;
+      let appProps = {};
+
+      if (typeof App.getInitialProps === 'function') {
+        appProps = await App.getInitialProps(appContext);
+      }
+
+      return _objectSpread(_objectSpread({}, appProps), {}, {
+        initialReduxState: reduxStore.getState()
+      });
+    }
+
+    constructor(props) {
+      super(props);
+      this.reduxStore = getOrCreateStore(props.initialReduxState);
+    }
+
+    render() {
+      return __jsx(App, _extends({}, this.props, {
+        reduxStore: this.reduxStore
+      }));
+    }
+
+  };
+});
+// EXTERNAL MODULE: external "react-redux"
+var external_react_redux_ = __webpack_require__("h74D");
+
+// CONCATENATED MODULE: ./pages/_app.js
+var _app_jsx = external_react_default.a.createElement;
+
+
+
+
+
+class _app_App extends app_default.a {
+  render() {
+    const {
+      Component,
+      pageProps,
+      reduxStore
+    } = this.props;
+    return _app_jsx(app["Container"], null, _app_jsx(external_react_redux_["Provider"], {
+      store: reduxStore
+    }, _app_jsx(Component, pageProps)));
+  }
+
+}
+
+/* harmony default export */ var _app = __webpack_exports__["default"] = (redux_store(_app_App));
+
+/***/ }),
+
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("B5Ud");
+module.exports = __webpack_require__("1TCz");
+
+
+/***/ }),
+
+/***/ "8Bbg":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("B5Ud")
 
 
 /***/ }),
@@ -226,6 +338,91 @@ function createUrl(router) {
 
 /***/ }),
 
+/***/ "BXF7":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return initStore; });
+/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("pNaP");
+/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var firebase_storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("ha8t");
+/* harmony import */ var firebase_storage__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(firebase_storage__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("rKB8");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("ZSx1");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_3__);
+//Firebaseインポート
+
+ //Reduxインポート
+
+
+ // ステート初期値
+
+const initial = {
+  message: 'START',
+  count: 0,
+  AD: []
+}; // レデューサー
+
+function counterReducer(state = initial, action) {
+  switch (action.type) {
+    //ダミー
+    case 'UPDATE USER':
+      return action.value;
+    //reduxテキストサンプル（後に削除）
+
+    case 'INCREMENT':
+      return {
+        message: 'INCREMENT',
+        count: state.count + 1
+      };
+
+    case 'DECREMENT':
+      return {
+        message: 'DECREMENT',
+        count: state.count - 1
+      };
+
+    case 'RESET':
+      return {
+        message: 'RESET',
+        count: initial.count
+      };
+
+    default:
+      return state;
+  }
+} // initStore関数（redux-store.jsで必要）
+
+
+function initStore(state = initial) {
+  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["createStore"])(counterReducer, state, Object(redux__WEBPACK_IMPORTED_MODULE_2__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_3___default.a));
+}
+var config = {
+  apiKey: "AIzaSyCru6a5vcBQIfzyiCwHC_6WNUhgbmTm5HI",
+  authDomain: "diving-point-map.firebaseapp.com",
+  databaseURL: "https://diving-point-map.firebaseio.com",
+  projectId: "diving-point-map",
+  storageBucket: "diving-point-map.appspot.com",
+  messagingSenderId: "1001187361611",
+  appId: "1:1001187361611:web:461c060736980dcf3fdece",
+  measurementId: "G-XTWF9XEDGG"
+};
+
+if (!firebase__WEBPACK_IMPORTED_MODULE_0__["apps"].length) {
+  try {
+    fireapp = firebase__WEBPACK_IMPORTED_MODULE_0__["initializeApp"](config);
+  } catch (error) {
+    console.log(error.message);
+  }
+} else {
+  firebase__WEBPACK_IMPORTED_MODULE_0__["app"]();
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (firebase__WEBPACK_IMPORTED_MODULE_0__);
+
+/***/ }),
+
 /***/ "TqRt":
 /***/ (function(module, exports) {
 
@@ -239,6 +436,13 @@ module.exports = _interopRequireDefault;
 
 /***/ }),
 
+/***/ "ZSx1":
+/***/ (function(module, exports) {
+
+module.exports = require("redux-thunk");
+
+/***/ }),
+
 /***/ "cDcd":
 /***/ (function(module, exports) {
 
@@ -246,10 +450,38 @@ module.exports = require("react");
 
 /***/ }),
 
+/***/ "h74D":
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+
+/***/ "ha8t":
+/***/ (function(module, exports) {
+
+module.exports = require("firebase/storage");
+
+/***/ }),
+
 /***/ "kYf9":
 /***/ (function(module, exports) {
 
 module.exports = require("next/dist/next-server/lib/utils.js");
+
+/***/ }),
+
+/***/ "pNaP":
+/***/ (function(module, exports) {
+
+module.exports = require("firebase");
+
+/***/ }),
+
+/***/ "rKB8":
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
 
 /***/ })
 

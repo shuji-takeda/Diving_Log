@@ -4,6 +4,7 @@ import Footer from './Footer';
 import style from '../../Static/Style';
 
 
+
 class Layout extends Component {
 
   render() {
@@ -11,6 +12,7 @@ class Layout extends Component {
       {style}
       <Header header={this.props.header} />
       {this.props.children}
+      <hr />
       <Footer footer="copyright タケシュ" account="twitter : @takeshshuhu"/>
     </div>);
   }

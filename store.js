@@ -1,18 +1,55 @@
+//Firebaseインポート
 import * as firebase from 'firebase';
 import 'firebase/storage';
 
+//Reduxインポート
+import {createStore, applyMiddleware} from 'redux';
+import thunkMiddleware from 'redux-thunk';
+
+// ステート初期値
+const initial = {
+  message:'START',
+  count: 0,
+  AD:[],
+}
+
+
+// レデューサー
+function counterReducer (state = initial, action) {
+  switch (action.type) {
+
+    //ダミー
+    case 'UPDATE USER':
+      return action.value;
+
+    //reduxテキストサンプル（後に削除）
+    case 'INCREMENT':
+      return {
+        message: 'INCREMENT',
+        count: state.count + 1
+      };
+    case 'DECREMENT':
+      return {
+        message: 'DECREMENT',
+        count: state.count - 1
+      };
+    case 'RESET':
+      return {
+        message: 'RESET',
+        count: initial.count
+      };
+    default:
+      return state;
+  }
+}
+
+// initStore関数（redux-store.jsで必要）
+export function initStore(state = initial) {
+  return createStore(counterReducer, state,
+    applyMiddleware(thunkMiddleware))
+}
 
 var config = {
-  //この状態なら正常に動く
-  //下のコメントアウト部にするとエラー発生→原因は環境変数が読み込めていない
-    // apiKey: "AIzaSyCru6a5vcBQIfzyiCwHC_6WNUhgbmTm5HI",
-    // authDomain: "diving-point-map.firebaseapp.com",
-    // databaseURL: "https://diving-point-map.firebaseio.com",
-    // projectId: "diving-point-map",
-    // storageBucket: "diving-point-map.appspot.com",
-    // messagingSenderId: "1001187361611",
-    // appId: "1:1001187361611:web:461c060736980dcf3fdece",
-    // measurementId: "G-XTWF9XEDGG"
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
