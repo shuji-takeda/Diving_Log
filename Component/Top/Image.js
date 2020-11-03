@@ -9,16 +9,16 @@ class Image extends Component {
   constructor(props) {
     super(props);
     this.fnameList = [
-      "../../Static/image/IMG_1506.JPG",
-      "../../Static/image/DSCN0341.JPG",
-      "../../Static/image/IMG_4432.JPG",
-      "../../Static/image/IMG_4573.JPG",
-      "../../Static/image/IMG_4427.JPG",
-      "../../Static/image/IMG_4404.JPG",
-      "../../Static/image/IMG_4397.JPG",
-      "../../Static/image/IMG_4146.JPG",
-      "../../Static/image/IMG_1498.JPG",
-      "../../Static/image/IMG_4731.JPG",
+      "/image/IMG_1506.JPG",
+      "/image/DSCN0341.JPG",
+      "/image/IMG_4432.JPG",
+      "/image/IMG_4573.JPG",
+      "/image/IMG_4427.JPG",
+      "/image/IMG_4404.JPG",
+      "/image/IMG_4397.JPG",
+      "/image/IMG_4146.JPG",
+      "/image/IMG_1498.JPG",
+      "/image/IMG_4731.JPG",
       "/image/IMG_1498.JPG",
     ];
     this.state = {
