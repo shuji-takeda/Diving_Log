@@ -4,9 +4,18 @@ import firebaseInit from "../../store";
 import Lib from '../../lib/Common';
 import {connect} from 'react-redux';
 
+import Images from 'react-image-resizer';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 let db = firebaseInit.firestore();
+
+const style = {
+  image: {
+    border: '1px solid #ccc',
+    background: '#fefefe',
+  },
+};
 
 class Image extends Component {
 
@@ -76,15 +85,14 @@ class Image extends Component {
   render() {
     return (
       <div className="ImgSlide">
-        <section>
-          <img class="img-fluid"src={this.state.Img}></img>
-          {/* <Image
+          {/* <img class="img-thumbnail" src={this.state.Img}></img> */}
+          <Images
             src={this.state.Img}
-            alt="Picture of a triangle"
-            width={500}
-            height={500}
-          /> */}
-        </section>
+            height={ 300 }
+            width={ 300 }
+            style={style.image}
+            />
+
       </div>
     );
   }

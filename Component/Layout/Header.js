@@ -1,46 +1,24 @@
 import React, {Component} from "react";
-import style from "../../Static/Style";
 import PopUp from "./PopUp";
 import Link from "next/link";
+import { Navbar, Nav } from 'react-bootstrap';
 
 class Header extends Component {
   render() {
     return (
-      <div>
-        {style}
-        
-        <div className="header">
-          <header class="site-header">
-            <div class="wrapper site-header__wrapper">
-              <Link href="/">
-                <a className="brand">{this.props.header}</a>
-              </Link>
-              <nav class="nav">
-                <button class="nav__toggle" aria-expanded="false" type="button">
-                  menu
-                </button>
-                <ul class="nav__wrapper">
-                  <li class="nav__item">
-                    <Link href="/">
-                      <a className="logo">Home</a>
-                    </Link>
-                  </li>
-                  <li class="nav__item">
-                    <Link href="/Search">
-                      <a className="logo">Search</a>
-                    </Link>
-                  </li>
-                  <li class="nav__item">
-                    <Link href="/Add">
-                      <a className="logo">Add</a>
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </header>
-        </div>
-      </div>
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                <Navbar.Brand href="/Sample">
+                    Sharering Diving Log
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/Add">Add</Nav.Link>
+                        <Nav.Link href="/Search">Search</Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar >
     );
   }
 }

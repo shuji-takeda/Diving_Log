@@ -111,7 +111,7 @@ class Search_Form extends Component {
           <div className="p-grid_list-images">
             <img style={this.ImgStyle}
               src={this.state.Url}
-              class="img-fluid"
+              class="img-thumbnail"
             />
           </div>
         </div>

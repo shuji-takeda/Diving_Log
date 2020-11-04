@@ -4,19 +4,12 @@ import React, {Component} from "react";
 class Footer extends Component {
   render() {
     return (
-      <div>
+      <footer class="footer">
         {style}
-        <footer id="footer01" class="footer outer-block">
-          <div class="logo">
-            <p>{this.props.footer}</p>
-            <p>{this.props.account}</p>
-          </div>
-        </footer>
-        {/* <div className="footer">
-          <p className="copy">{this.props.footer}</p>
-          <div>{this.props.account}</div>
-        </div> */}
-      </div>
+        <div class="container">
+          <p class="text-muted">COPYRIGHT @takeshshuhu 2020</p>
+        </div>
+      </footer>
     );
   }
 }

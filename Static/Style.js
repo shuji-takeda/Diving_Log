@@ -8,15 +8,7 @@ body {
   color: @text-color;
   background-color: @body-bg;
 }
-.header {
-    border-top: 3px solid rgba(44,137,51,1.00);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: rgba(255, 255, 255, 0.5) -1px 1px 1px inset, rgba(255, 255, 255, 0.8) -1px 1px 0;
-    -moz-box-shadow: rgba(255, 255, 255, 0.5) -1px 1px 1px inset, rgba(255, 255, 255, 0.8) -1px 1px 0;
-    box-shadow: rgba(255, 255, 255, 0.5) -1px 1px 1px inset, rgba(255, 255, 255, 0.8) -1px 1px 0;
-    padding: 0 20px;
-    overflow: hidden;
-  }
+
   .logo{
     font-family: 'Amatic SC', cursive;
     position: relative;
@@ -51,41 +43,27 @@ element.style {
     top: 0;
     width: 100%;
   }
-  .footer {
-    clear: both;
-    margin: 80px 0 0;
-    text-align : center;
-    width: 100%;
-    height: 100%;
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #d6d6d6));
-    background-image: -webkit-linear-gradient(#bbbbbb 0%, #d6d6d6 100%);
-    background-image: -moz-linear-gradient(#bbbbbb 0%, #d6d6d6 100%);
-    background-image: -o-linear-gradient(#bbbbbb 0%, #d6d6d6 100%);
-    background-image: linear-gradient(#bbbbbb 0%, #d6d6d6 100%);
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: rgba(255, 255, 255, 1) 0 1px 0;
-    -moz-box-shadow: rgba(255, 255, 255, 1) 0 1px 0;
-    box-shadow: rgba(255, 255, 255, 1) 0 1px 0;
-    font-family: 'Caveat', cursive;
 
-  @media screen and (max-width: 479px) { /*ウィンドウ幅が最大479pxまでの場合に適用*/
-    clear: both;
-    margin: 80px 0 0;
-    text-align : center;
+  .footer {
+    position: fixed;
+    bottom: 0;
     width: 100%;
-    height: 100%;
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #d6d6d6));
-    background-image: -webkit-linear-gradient(#bbbbbb 0%, #d6d6d6 100%);
-    background-image: -moz-linear-gradient(#bbbbbb 0%, #d6d6d6 100%);
-    background-image: -o-linear-gradient(#bbbbbb 0%, #d6d6d6 100%);
-    background-image: linear-gradient(#bbbbbb 0%, #d6d6d6 100%);
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
-    -webkit-box-shadow: rgba(255, 255, 255, 1) 0 1px 0;
-    -moz-box-shadow: rgba(255, 255, 255, 1) 0 1px 0;
-    box-shadow: rgba(255, 255, 255, 1) 0 1px 0;
-    font-family: 'Caveat', cursive;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
     }
-  }
+    body > .container {
+    padding: 60px 15px 0;
+    }
+    .container .text-muted {
+    margin: 20px 0;
+    }
+     
+    .footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+    }
+
   .copy{
     clear: both;
     padding-top: 30px;
@@ -144,60 +122,6 @@ element.style {
     height: 400px;
     background-color: grey;
   }
-
-  //Header
- .brand {
-  font-weight: bold;
-  font-size: 20px; }
- 
-.site-header {
-  position: relative;
-  background-color: #def7ff; }
- 
-.site-header__wrapper {
-  padding-top: 1rem;
-  padding-bottom: 1rem; }
-  @media (min-width: 600px) {
-    .site-header__wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 0;
-      padding-bottom: 0; } }
-@media (min-width: 600px) {
-  .nav__wrapper {
-    display: flex; } }
- 
-@media (max-width: 599px) {
-  .nav__wrapper {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    z-index: -1;
-    background-color: #d9f0f7;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out; }
-    .nav__wrapper.active {
-      visibility: visible;
-      opacity: 1;
-      transform: translateY(0); } }
- 
-.nav__item a {
-  display: block;
-  padding: 1.5rem 1rem; }
- 
-.nav__toggle {
-  display: none; }
-  @media (max-width: 599px) {
-    .nav__toggle {
-      display: block;
-      position: absolute;
-      right: 1rem;
-      top: 1rem; } }
-
   //Add Form
   .cp_iptxt {
     position: relative;
@@ -376,7 +300,6 @@ element.style {
     transition: 0.3s;
     color: #da3c41;
   }
-
 
 
 `}</style>;
