@@ -3,8 +3,16 @@ import firebase, {database} from "firebase";
 import firebaseInit from "../../store";
 //React bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Images from 'react-image-resizer';
 
 let db = firebaseInit.firestore();
+
+const style = {
+  image: {
+    border: '1px solid #ccc',
+    background: '#fefefe',
+  },
+};
 
 class Search_Form extends Component {
 
@@ -109,9 +117,11 @@ class Search_Form extends Component {
         <hr />
         <div className="FileImage">
           <div className="p-grid_list-images">
-            <img style={this.ImgStyle}
-              src={this.state.Url}
-              class="img-thumbnail"
+          <Images
+            src={this.state.Url}
+            height={ 300 }
+            width={ 300 }
+            style={style.image}
             />
           </div>
         </div>

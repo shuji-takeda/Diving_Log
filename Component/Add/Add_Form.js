@@ -119,24 +119,6 @@ class Add_Form extends Component {
     this.setState({dataset: dataset});
   };
 
-  //     getLastId(){
-  //     let db = firebaseInit.database();
-  //     let ref = db.ref('diving-point-map/');
-  //     let self = this;
-  //     ref.orderByKey()
-  //     .limitToFirst(10)
-  //     // .equalTo("20201003")
-  //     .on('value', (snapshot)=>{
-  //         let res = snapshot.val();
-  //         for(let i in res){
-  //             self.setState({
-  //                 lastId:i
-  //             });
-  //             return;
-  //         }
-  //     });
-  // }
-
   setLastId = (lastId) => {
     this.setState({lastId: lastId});
   };
